@@ -1,4 +1,5 @@
 const CryptoJS = require("crypto-js");
+const getRandomInt = require("../utils/getRandomInt");
 
 const HUYNYA = "idinaxuydalbayobblyatmenyavsezaebalinehochezhitshuchuhochukoneshnonoblyatzaebalsyacehstno".repeat(512)
 const SECRET = 'lox';
@@ -6,11 +7,12 @@ const SECRET = 'lox';
 class indexController {
     async read(req, res, next) {
         try {
-            // const ciphertext = CryptoJS.AES.encrypt(req.body.count + '', SECRET).toString();
             const data = CryptoJS.AES.encrypt(HUYNYA + "%%%" + req.body.count, SECRET).toString();
+            const time = getRandomInt(req.body.count * .1, req.body.count)
 
-            return res.json({success: true, data});
-            // return res.json({success: true});
+            setTimeout(() => {
+                return res.json({success: true, data})
+            }, time * 1000)
         } catch (e) {
             console.log(e)
             next(e);
