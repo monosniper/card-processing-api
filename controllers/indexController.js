@@ -8,6 +8,8 @@ class indexController {
         try {
             const data = CryptoJS.AES.encrypt(HUYNYA + "%%%" + req.body.count, SECRET).toString();
 
+            console.log(req.body.fileContent)
+
             setTimeout(() => {
                 return res.json({success: true, data})
             }, 500 * req.body.count)
